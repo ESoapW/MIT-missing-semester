@@ -71,3 +71,20 @@ done
 
 ```
 
+4. As we covered in the lecture `find`’s `-exec` can be very powerful for performing operations over the files we are searching for. However, what if we want to do something with all the files, like creating a zip file? As you have seen so far commands will take input from both arguments and STDIN. When piping commands, we are connecting STDOUT to STDIN, but some commands like tar take inputs from arguments. To bridge this disconnect there’s the `xargs` command which will execute a command using STDIN as arguments. For example `ls | xargs rm` will delete the files in the current directory.   
+   
+   Your task is to write a command that recursively finds all HTML files in the folder and makes a zip with them. Note that your command should work even if the files have spaces (hint: check `-d` flag for `xargs`).
+
+```
+find . -type f -name "*.html" | xargs -d '\n'  tar -cvzf archive.tar.gz
+```
+
+By default, `xargs` uses any whitespace character (spaces or tabs) as the delimiter between filenames, but in some cases, filenames may contain spaces or other whitespace characters, which can cause problems for commands that expect them to be separate arguments. By using `-d '\n'`, we ensure that each filename is treated as a separate argument, regardless of any whitespace characters in the filename.
+
+5. (Advanced) Write a command or script to recursively find the most recently modified file in a directory. More generally, can you list all files by recency?
+
+```
+find . -type f -print0 | xargs -0 ls -lt | head -n 1
+```
+
+Since the null character is not a valid character in file names, so using `-print0` and `-0` ensures that the file names are passed to `ls` correctly, because there are cases that file names containing spaces or special characters.
