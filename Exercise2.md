@@ -22,6 +22,8 @@ A sample output would look like this
  
  2. Write bash functions `marco` and `polo` that do the following. Whenever you execute `marco` the current working directory should be saved in some manner, then when you execute `polo`, no matter what directory you are in, `polo` should `cd` you back to the directory where you executed `marco`. For ease of debugging you can write the code in a file `marco.sh` and (re)load the definitions to your shell by executing source `marco.sh`.
 
+Answer:
+
 ```
 #!/bin/bash
 
@@ -51,6 +53,8 @@ function polo {
  echo "Everything went according to plan"
 ```
 
+Answer:
+
 report.sh
 ```
 #!/bin/bash
@@ -75,13 +79,18 @@ done
    
    Your task is to write a command that recursively finds all HTML files in the folder and makes a zip with them. Note that your command should work even if the files have spaces (hint: check `-d` flag for `xargs`).
 
+Answer:
+
 ```
 find . -type f -name "*.html" | xargs -d '\n'  tar -cvzf archive.tar.gz
 ```
 
 By default, `xargs` uses any whitespace character (spaces or tabs) as the delimiter between filenames, but in some cases, filenames may contain spaces or other whitespace characters, which can cause problems for commands that expect them to be separate arguments. By using `-d '\n'`, we ensure that each filename is treated as a separate argument, regardless of any whitespace characters in the filename.
 
+
 5. (Advanced) Write a command or script to recursively find the most recently modified file in a directory. More generally, can you list all files by recency?
+
+Answer:
 
 ```
 find . -type f -print0 | xargs -0 ls -lt | head -n 1
