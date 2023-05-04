@@ -2,9 +2,9 @@
  
  Answer:
  
- Find words that contain at least three `a`s and don’t have a `'s` ending. 
+ Find the number of words that contain at least three `a`s and don’t have a `'s` ending. 
  
  Explain: `\w` and `$` exclude `'s`, another possible way is to use negative lookahead (?!...)
  ```
- grep -E "(\w*a\w*){3}$" words
+ grep -E "(\w*a\w*){3}$" words | wc -l
  ```
