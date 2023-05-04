@@ -6,5 +6,19 @@
  
  Explain: `\w` and `$` exclude `'s`, another possible way is to use negative lookahead (?!...)
  ```
- grep -E "(\w*a\w*){3}$" words | wc -l
+ grep -iE "(\w*a\w*){3}$" words | wc -l
+ ```
+
+ Get the last two letters of the words
+ 
+ Explain: The replacement string `\1` replaces the entire line with the captured group `.*(..)$`, which contains the last 2 characters.
+ ```
+ grep -iE "(\w*a\w*){3}$" words | sed -E "s/.*(..)$/\1/"
+ ```
+ 
+ Find the three most common:
+ 
+ Explain: `uniq -c` will collapse consecutive lines that are the same into a single line, prefixed with a count of the number of occurrences. `sort -n` will sort in numeric (instead of lexicographic) order. `-k1,1` means “sort by only the first whitespace-separated column”. There’s also `sort -r`, which sorts in reverse order.
+ ```
+ grep -iE "(\w*a\w*){3}$" words | sed -E "s/.*(..)$/\1/" | sort | uniq -c | sort -nk1,1 | tail -n3
  ```
