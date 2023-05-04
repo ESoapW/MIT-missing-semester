@@ -28,4 +28,6 @@
  grep -iE "(\w*a\w*){3}$" words | sed -E "s/.*(..)$/\1/" | sort | uniq -c | wc -l
  ```
  
- Which combinations do not occur? Ans: Write a script to generate all the two-letter combinations, then do a `diff` with the previous result
+ Which combinations do not occur? Ans: Write a script to generate all the two-letter combinations, then do a `diff` with the previous result.
+ 
+2. To do in-place substitution it is quite tempting to do something like `sed s/REGEX/SUBSTITUTION/ input.txt > input.txt`. However this is a bad idea, why? Is this particular to `sed`? Use `man sed` to find out how to accomplish this.
