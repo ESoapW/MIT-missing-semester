@@ -31,3 +31,7 @@
  Which combinations do not occur? Ans: Write a script to generate all the two-letter combinations, then do a `diff` with the previous result.
  
 2. To do in-place substitution it is quite tempting to do something like `sed s/REGEX/SUBSTITUTION/ input.txt > input.txt`. However this is a bad idea, why? Is this particular to `sed`? Use `man sed` to find out how to accomplish this.
+
+ Answer:
+ 
+ This command will return a blank file. the shell will first truncate the input file to zero bytes before running sed, and then write the output of sed to the input file. This means that any data that was originally in the input file will be lost, and replaced with the output of sed. It is generally a bad idea to in-place edit files as mistakes can be made when using regular expressions and without backups on the original file, it can be very difficult to recover. This is not particular to `sed` but in general to all forms of in-place editing files. To accomplish in-plface substitution add the `-i` tag.
