@@ -22,3 +22,10 @@
  ```
  grep -iE "(\w*a\w*){3}$" words | sed -E "s/.*(..)$/\1/" | sort | uniq -c | sort -nk1,1 | tail -n3
  ```
+
+ How many of those two-letter combinations are there?
+ ```
+ grep -iE "(\w*a\w*){3}$" words | sed -E "s/.*(..)$/\1/" | sort | uniq -c | wc -l
+ ```
+ 
+ Which combinations do not occur? Ans: Write a script to generate all the two-letter combinations, then do a `diff` with the previous result
