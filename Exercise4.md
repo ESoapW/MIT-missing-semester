@@ -29,6 +29,24 @@
  ```
  
  Which combinations do not occur? Ans: Write a script to generate all the two-letter combinations, then do a `diff` with the previous result.   
+ ```
+ #!/bin/bash
+ for i in {a..z};do
+  for j in {a..z};do
+     echo  "$i$j"
+  done
+ done
+ ```
+ ```
+ ./all.sh > all.txt
+ ```
+ ```
+ cat /usr/share/dict/words | tr "[:upper:]" "[:lower:]" | grep -E "^([^a]*a){3}.*$" | grep -v "'s$" | sed -E "s/.*([a-z]{2})$/\1/" | sort | uniq > occurance.txt
+ ```
+ ```
+ diff --unchanged-group-format='' <(cat occurance.txt) <(cat all.txt) | wc -l
+ ```
+ `--unchanged-group-format=''` sets the same content in the two files to blank   
  
  
 2. To do in-place substitution it is quite tempting to do something like `sed s/REGEX/SUBSTITUTION/ input.txt > input.txt`. However this is a bad idea, why? Is this particular to `sed`? Use `man sed` to find out how to accomplish this.
