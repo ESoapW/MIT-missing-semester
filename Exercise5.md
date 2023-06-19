@@ -38,4 +38,7 @@
  sleep 60 & pidwait $!
  ```
  `$!` is a special variable that represents the PID of the most recently executed background process.
+
+
+ https://missing-semester-cn.github.io/missing-notes-and-solutions/2020/solutions/command-line-solution/
  
